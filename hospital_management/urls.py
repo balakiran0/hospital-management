@@ -17,8 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from appointments.views import AppointmentViewSet
-from patients.views import PatientViewSet, MedicalHistoryViewSet
+from appointments.views import AppointmentViewSet, book_appointment, appointment_list
+from patients.views import PatientViewSet, MedicalHistoryViewSet, patient_history
 
 router = DefaultRouter()
 router.register(r'appointments', AppointmentViewSet)
@@ -28,4 +28,7 @@ router.register(r'medicalhistory', MedicalHistoryViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('appointments/book/', book_appointment, name='book_appointment'),
+    path('appointments/', appointment_list, name='appointment_list'),
+    path('history/', patient_history, name='patient_history'),
 ]
