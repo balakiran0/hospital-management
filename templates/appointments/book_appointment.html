@@ -1,9 +1,9 @@
-<!-- book_appointment.html -->
-<!DOCTYPE html>
-<html>
-<head><title>Book Appointment</title></head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 <h2>Book Appointment</h2>
-<!-- Appointment booking form -->
-</body>
-</html>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Book</button>
+</form>
+{% endblock %}
