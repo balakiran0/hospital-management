@@ -1,9 +1,24 @@
-<!-- appointment_list.html -->
-<!DOCTYPE html>
-<html>
-<head><title>Appointment List</title></head>
-<body>
-<h2>Appointment List</h2>
-<!-- List of appointments -->
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<h2>My Appointments</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Reason</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for appointment in appointments %}
+        <tr>
+            <td>{{ appointment.doctor }}</td>
+            <td>{{ appointment.date }}</td>
+            <td>{{ appointment.reason }}</td>
+            <td>{{ appointment.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
