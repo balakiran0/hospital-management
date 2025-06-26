@@ -1,11 +1,9 @@
-from rest_framework import viewsets
+from django.shortcuts import render
 from .models import Patient, MedicalHistory
-from .serializers import PatientSerializer, MedicalHistorySerializer
+from django.contrib.auth.decorators import login_required
 
-class PatientViewSet(viewsets.ModelViewSet):
-    queryset = Patient.objects.all()
-    serializer_class = PatientSerializer
-
-class MedicalHistoryViewSet(viewsets.ModelViewSet):
-    queryset = MedicalHistory.objects.all()
-    serializer_class = MedicalHistorySerializer
+@login_required
+def patient_history(request):
+    patient = Patient.objects.get(user=request.user)
+    history = MedicalHistory.objects.filter(patient=patient)
+    return render(request, 'patients/history.html', {'patient': patient, 'history': history})
