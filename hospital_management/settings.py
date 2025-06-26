@@ -125,3 +125,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Automatically create user groups after migrations
+from django.db.models.signals import post_migrate
+from django.contrib.auth.models import Group
+
+def create_groups(sender, **kwargs):
+    Group.objects.get_or_create(name='Doctors')
+    Group.objects.get_or_create(name='Nurses')
+
+post_migrate.connect(create_groups)
